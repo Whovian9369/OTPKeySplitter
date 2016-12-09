@@ -17,5 +17,6 @@ Please do feel free to throw Pull Requests at me to fix any mistakes that I may 
  * FIX94
  * supster131
  * kanye_west
+ * Audiosurf for pushing me along and putting up with me rambling to them constantly about this during writing.
  * Those that put in useful pull requests, if anyone does.
  * Anyone else that cares enough to nag me about it in the IRC.
