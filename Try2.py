@@ -2,50 +2,40 @@
 import os, sys, zlib, binascii
 import codecs
 from Crypto.Cipher import AES
-##
-##
+
 
 otpbinpath = os.path.abspath("OTP/otp.bin")
-if os.path.exists(otpbinpath):
-    with open(otpbinpath,'rb') as f:
-        f.seek(0x90)
-        starbuck_ancast_key = binascii.hexlify(f.read(16))
-        f.seek(0xE0)
-        wiiu_common_key = binascii.hexlify(f.read(16))
-else:
-        os.makedirs("OTP")
-        print("Put the otp.bin into the OTP folder please!")
-        print(" ")
-if not os.path.exists("Output/"):
-    os.makedirs("Output/")
-    os.makedirs("Output/01 - Wii Bank")
-    os.makedirs("Output/02 - Wii U Bank")
-    os.makedirs("Output/03 - Wii U Bank")
-    os.makedirs("Output/04 - Wii U Bank")
-    os.makedirs("Output/05 - Wii U Bank")
-    os.makedirs("Output/06 - Wii SEEPROM Bank")
-    os.makedirs("Output/07 - Misc Bank")
-if not os.path.exists("Output/01 - Wii Bank"):
-    print("I assume that I did not make ANY of the output folders.")
-    print("So I'm doing that now. Because screw you is why.")
-    os.makedirs("Output/01 - Wii Bank")
-    os.makedirs("Output/02 - Wii U Bank")
-    os.makedirs("Output/03 - Wii U Bank")
-    os.makedirs("Output/04 - Wii U Bank")
-    os.makedirs("Output/05 - Wii U Bank")
-    os.makedirs("Output/06 - Wii SEEPROM Bank")
-    os.makedirs("Output/07 - Misc Bank")
-else:
-    print("The output folders are probably already made. Not doing a thing.")
-print("")
-print("")
-print("Okay, so: Time to start actually doing the key extraction!")
+
+#Thank you Audiosurt for:
+
+x = "Output/"
+k = " - Wii U Bank"
+folders = [x, x+"01 - Wii Bank", x+"02"+k, x+"03"+k, x+"04"+k, x+"05"+k, x+"06 - Wii SEEPROM Bank", x+"07 - Misc Bank"]
+for f in folders:
+	if not os.path.exists(f):
+		os.makedirs(f)
+#End Audiosurf's amazing and super useful contribution!
 
 #prepare keys
 #Thanks FIX94 for this code snippet from the iosuhax
 #fw.img grabber in his IOSUHax Branch.
 #For the source of this code, see:
 # https://github.com/FIX94/iosuhax/blob/master/bin/getfwimg.py
+
+if os.path.exists(otpbinpath):
+    with open(otpbinpath,'rb') as f:
+        f.seek(0x90)
+        starbuck_ancast_key = binascii.hexlify(f.read(16))
+        f.seek(0xE0)
+        wiiu_common_key = binascii.hexlify(f.read(16))
+        print("\n\nOkay, so: Time to start actually doing the key extraction!")
+else:
+    if not os.path.exists("OTP"):
+        os.makedirs("OTP")
+    else:
+        print("\nPut the otp.bin into the OTP folder please!\n")
+        sys.exit(1)
+
 wiiu_common_key = codecs.decode(wiiu_common_key, 'hex')
 starbuck_ancast_key = codecs.decode(starbuck_ancast_key, 'hex')
 
