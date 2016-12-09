@@ -10,10 +10,11 @@ Please do feel free to throw Pull Requests at me to fix any mistakes that I may 
 
 ### BIG thanks goes to (in order of when I remembered their name):
 
- * vgmoose (Who got me started on putting this as a python script, so thanks man!)
+ * vgmoose (He got me started on putting this as a python script, so thanks man!)
+ * hydrogen18 (He gave me some example code with BeautifulSoup4, and gave me some advice... That I don't think I'll end up using honestly.) 
  * Dimok
  * QuarkTheAwesome
- * Fix94
+ * FIX94
  * supster131
  * kanye_west
  * Those that put in useful pull requests, if anyone does.
