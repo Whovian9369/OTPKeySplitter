@@ -12,11 +12,6 @@ if os.path.exists(otpbinpath):
         starbuck_ancast_key = binascii.hexlify(f.read(16))
         f.seek(0xE0)
         wiiu_common_key = binascii.hexlify(f.read(16))
-        print("The otp.bin has been found!")
-        print(" ")
-        print("Okay. I have the wiiu_common_key!")
-        print(" ")
-        print("Okay. I have the starbuck_ancast_key!")
 else:
         os.makedirs("OTP")
         print("Put the otp.bin into the OTP folder please!")
@@ -41,8 +36,23 @@ if not os.path.exists("Output/01 - Wii Bank"):
     os.makedirs("Output/06 - Wii SEEPROM Bank")
     os.makedirs("Output/07 - Misc Bank")
 else:
-    print("Folders are probably already made. Not doing anything.")
+    print("The output folders are probably already made. Not doing a thing.")
+print("")
+print("")
+print("Okay, so: Time to start actually doing the key extraction!")
 
-print("")
-print("")
-print("Uh what do you want me to do now?")
+#prepare keys
+#Thanks FIX94 for this code snippet from the iosuhax
+#fw.img grabber in his IOSUHax Branch.
+#For the source of this code, see:
+# https://github.com/FIX94/iosuhax/blob/master/bin/getfwimg.py
+wiiu_common_key = codecs.decode(wiiu_common_key, 'hex')
+starbuck_ancast_key = codecs.decode(starbuck_ancast_key, 'hex')
+
+if zlib.crc32(wiiu_common_key) & 0xffffffff != 0x7a2160de:
+    print("wiiu_common_key is wrong")
+    sys.exit(1)
+
+if zlib.crc32(starbuck_ancast_key) & 0xffffffff != 0xe6e36a34:
+    print("starbuck_ancast_key is wrong")
+    sys.exit(1)
