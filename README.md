@@ -18,5 +18,6 @@ Please do feel free to throw Pull Requests at me to fix any mistakes that I may 
  * supster131
  * kanye_west
  * Audiosurf for pushing me along and putting up with me rambling to them constantly about this during writing. And code contributions.
+ * Truedread for giving me a [picture of his dog](http://i.sli.mg/9NDr34.jpg) to give me motivation while working on this, and supplying an OTP.bin for me to test with.
  * Those that put in useful pull requests, if anyone does.
  * Anyone else that cares enough to nag me about it in the IRC.
