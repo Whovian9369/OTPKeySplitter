@@ -363,7 +363,7 @@ fi = open(target, "wb")
 fi.write(wiiu_usb_key_seed_u32.decode("hex"))
 fi.close()
 
-target=out4+"04. vWii NG private key?.bin"
+target=out4+"04. Possible vWii NG private key.bin"
 fi = open(target, "wb")
 fi.write(possible_vwii_ng_private_key.decode("hex"))
 fi.close()
@@ -384,12 +384,12 @@ fi.write(unknown_12.decode("hex"))
 fi.close()
 
  # 5. Wii U Bank
-target=out5+"01. Wii U and vWii Root-CA version (0x00000012)?.bin"
+target=out5+"01. Possible Wii U and vWii Root-CA version (0x00000012).bin"
 fi = open(target, "wb")
 fi.write(possible_wiiu_and_vwii_root_ca_version.decode("hex"))
 fi.close()
 
-target=out5+"02. Wii U and vWii Root-CA MS (0x00000003)?.bin"
+target=out5+"02. Possible Wii U and vWii Root-CA MS (0x00000003).bin"
 fi = open(target, "wb")
 fi.write(possible_wiiu_and_vwii_root_ca_ms.decode("hex"))
 fi.close()
@@ -399,7 +399,7 @@ fi = open(target, "wb")
 fi.write(unknown_13.decode("hex"))
 fi.close()
 
-target=out5+"04. Wii U and vWii Root-CA signature?.bin"
+target=out5+"04. Possible Wii U and vWii Root-CA signature.bin"
 fi = open(target, "wb")
 fi.write(possible_wiiu_and_vwii_root_ca_signature.decode("hex"))
 fi.close()
@@ -421,7 +421,7 @@ fi = open(target, "wb")
 fi.write(old_wii_seeprom_cert.decode("hex"))
 fi.close()
 
-target=out6+"02. Old Wii SEEPROM signature?.bin"
+target=out6+"02. Possible Old Wii SEEPROM signature.bin"
 fi = open(target, "wb")
 fi.write(old_wii_seeprom_sig.decode("hex"))
 fi.close()

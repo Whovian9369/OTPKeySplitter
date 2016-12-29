@@ -15,6 +15,7 @@ Please do feel free to throw Pull Requests at me to fix any mistakes that you th
  * Extract your OTP to your SD card by using [OTP2SD](https://github.com/dimok789/otp2sd_dumper)
  * Copy the resulting OTP.bin to a folder called "OTP"
  	* If you forget to do so or put it in the wrong place before running the script - It will create the folder then let you know where to put it. 
+ * Install pycrypto by using `` on Windows, or `sudo pip install pycrypto` (or however else you know/prefer) on Linux.
  * Run the script using Python 2
  	* On various Linux distributions, this can likely be done by running `python2 OTPKeySplitter.py`
  * Use a hex editor to copy out your keys.
