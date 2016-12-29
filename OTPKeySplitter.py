@@ -1,4 +1,4 @@
-#!/user/bin/env python2
+#!/usr/bin/env python2
 import os, sys, zlib, binascii
 import codecs
 from Crypto.Cipher import AES
