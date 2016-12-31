@@ -45,7 +45,7 @@ if os.path.exists(otpbinpath):
         f.seek(0x000)
         vwii_boot1_sha1 = binascii.hexlify(f.read(20))
         f.seek(0x014)
-        vwii_common_key = binascii.hexlify(f.read(16))
+        wii_common_key = binascii.hexlify(f.read(16))
         f.seek(0x024)
         vwii_ng_id = binascii.hexlify(f.read(4))
         f.seek(0x028)
@@ -87,6 +87,8 @@ if os.path.exists(otpbinpath):
         unknown_01 = binascii.hexlify(f.read(16))
         f.seek(0x0C0)
         unknown_02 = binascii.hexlify(f.read(16))
+        f.seek(0x0D0)
+        vwii_common_key = binascii.hexlify(f.read(16))
         f.seek(0x0E0)
         wiiu_common_key = binascii.hexlify(f.read(16))
         f.seek(0x0F0)
@@ -180,7 +182,7 @@ fi.close()
 
 target=out0+"02. Wii common key.bin"
 fi = open(target, "wb")
-fi.write(vwii_common_key.decode("hex"))
+fi.write(wii_common_key.decode("hex"))
 fi.close()
 
 target=out0+"03. Wii NG ID.bin"
