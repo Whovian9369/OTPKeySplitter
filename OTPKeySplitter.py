@@ -4,14 +4,14 @@ import codecs
 from Crypto.Cipher import AES
 
 
-otpbinpath = os.path.abspath("OTP/otp.bin")
+optbin = os.path.abspath("OTP/otp.bin")
 
 #Thank you Audiosurf for the initial folder creation help.
 #Mine was way too messy originally!
 
 x = "Output/"
 k = " - Wii U Bank"
-outputfol = [x, x+"00 - Wii Bank" , x+"01"+k, x+"02"+k, x+"03"+k, x+"04"+k, x+"05"+k , x+"06 - Wii SEEPROM Bank", x+"07 - Misc Bank"]
+outputfol = [x, x+"00 - Wii Bank" , x+"01"+k, x+"02"+k, x+"03"+k, x+"04 - Wii U NG Bank", x+"05 - Wii U Certificate Bank" , x+"06 - Wii Certificate Bank", x+"07 - Misc Bank"]
 for f in outputfol:
 	if not os.path.exists(f):
 		os.makedirs(f)
@@ -21,50 +21,60 @@ out0 = x+"00 - Wii Bank"+"/"
 out1 = x+"01"+k+"/"
 out2 = x+"02"+k+"/"
 out3 = x+"03"+k+"/"
-out4 = x+"04"+k+"/"
+out4 = x+"04 - Wii U NG Bank/"
 out5 = x+"05"+k+"/"
 out6 = x+"06 - Wii SEEPROM Bank/"
 out7 = x+"07 - Misc Bank/"
-#wiiu = "Wii U "
-#vwii = "vWii "
 
 #End other variables
 
 #prepare keys
 #Thanks FIX94 for this code snippet from the iosuhax
-#fw.img grabber in his IOSUHax Branch.
+#fw.img grabber in his IOSUHax fork.
 #For the source of this code, see:
-# https://github.com/FIX94/iosuhax/blob/master/bin/getfwimg.py
+#https://github.com/FIX94/iosuhax/blob/master/bin/getfwimg.py
 
-if os.path.exists(otpbinpath):
-    with open(otpbinpath,'rb') as f:
+if os.path.exists(optbin):
+    with open(optbin,'rb') as f:
         print("Key extraction time!")
 
         # First, vWii.
 
         f.seek(0x000)
-        vwii_boot1_sha1 = binascii.hexlify(f.read(20))
+        wii_boot1_sha1 = binascii.hexlify(f.read(20))
         f.seek(0x014)
         wii_common_key = binascii.hexlify(f.read(16))
         f.seek(0x024)
-        vwii_ng_id = binascii.hexlify(f.read(4))
+        wii_ng_id = binascii.hexlify(f.read(4))
         f.seek(0x028)
-        vwii_ng_priv_key = binascii.hexlify(f.read(29))
+        wii_ng_priv_key = binascii.hexlify(f.read(29))
         f.seek(0x044)
-        vwii_nand_hmac = binascii.hexlify(f.read(20))
+        wii_nand_hmac = binascii.hexlify(f.read(20))
         f.seek(0x058)
-        vwii_nand_key = binascii.hexlify(f.read(16))
+        wii_nand_key = binascii.hexlify(f.read(16))
         f.seek(0x068)
-        vwii_rng_key = binascii.hexlify(f.read(16))
+        wii_rng_key = binascii.hexlify(f.read(16))
         f.seek(0x078)
-        vwii_unknown = binascii.hexlify(f.read(8))
-        f.seek(0x220)
-        possible_vwii_ng_private_key = binascii.hexlify(f.read(32))
+        wii_unknown01_padding = binascii.hexlify(f.read(8))
+        f.seek(0x300)
+        wii_root_cert_ms_id_0x00000002 = binascii.hexlify(f.read(4))
+        f.seek(0x304)
+        wii_root_cert_ca_id_0x00000001 = binascii.hexlify(f.read(4))
+        f.seek(0x308)
+        wii_root_cert_ng_key_id = binascii.hexlify(f.read(4))
+        f.seek(0x30C)
+        wii_root_cert_ng_signature = binascii.hexlify(f.read(60))
+        f.seek(0x348)
+        wii_korean_key = binascii.hexlify(f.read(16))
+        f.seek(0x358)
+        wii_unknown02_unused = binascii.hexlify(f.read(8))
+        f.seek(0x360)
+        wii_private_nss_device_cert_key = binascii.hexlify(f.read(32))
         
         # vWii SEEPROM Bank
         
-        f.seek(0x300)
-        old_wii_seeprom_cert = binascii.hexlify(f.read(96))
+#        f.seek(0x300)
+#        old_wii_seeprom_cert = binascii.hexlify(f.read(96))
         f.seek(0x360)
         old_wii_seeprom_sig = binascii.hexlify(f.read(32))
         
@@ -74,29 +84,29 @@ if os.path.exists(otpbinpath):
         f.seek(0x080)
         security_level_flag = binascii.hexlify(f.read(4))
         f.seek(0x084)
-        some_iostrength_config_flag = binascii.hexlify(f.read(4))
+        iostrength_config_flag = binascii.hexlify(f.read(4))
         f.seek(0x088)
         seeprom_manual_clk_pulse_length = binascii.hexlify(f.read(4))
         f.seek(0x08C)
         unknown_00010000 = binascii.hexlify(f.read(4))
-        f.seek(0x90)
-        starbuck_ancast_key = binascii.hexlify(f.read(16))
-        f.seek(0xA0)
+        f.seek(0x090)
+        wiiu_starbuck_ancast_key = binascii.hexlify(f.read(16))
+        f.seek(0x0A0)
         wiiu_seeprom_key = binascii.hexlify(f.read(16))
         f.seek(0x0B0)
-        unknown_01 = binascii.hexlify(f.read(16))
+        unknown_01_unused = binascii.hexlify(f.read(16))
         f.seek(0x0C0)
-        unknown_02 = binascii.hexlify(f.read(16))
+        unknown_02_unused = binascii.hexlify(f.read(16))
         f.seek(0x0D0)
         vwii_common_key = binascii.hexlify(f.read(16))
         f.seek(0x0E0)
         wiiu_common_key = binascii.hexlify(f.read(16))
         f.seek(0x0F0)
-        unknown_03 = binascii.hexlify(f.read(16))
+        unknown_03_unused = binascii.hexlify(f.read(16))
         f.seek(0x100)
-        unknown_04 = binascii.hexlify(f.read(16))
+        unknown_04_unused = binascii.hexlify(f.read(16))
         f.seek(0x110)
-        unknown_05 = binascii.hexlify(f.read(16))
+        unknown_05_unused = binascii.hexlify(f.read(16))
         f.seek(0x120)        
         encrypt_decrypt_ssl_rsa_key = binascii.hexlify(f.read(16))
         f.seek(0x130)
@@ -112,37 +122,39 @@ if os.path.exists(otpbinpath):
         f.seek(0x180)
         wiiu_mlc_emmc_key = binascii.hexlify(f.read(16))
         f.seek(0x190)
-        seeprom_devkit_key_decryption_key = binascii.hexlify(f.read(16))
+        encrypt_decrypt_shdd_key = binascii.hexlify(f.read(16))
         f.seek(0x1A0)
         encryption_key_for_drh_wlan_data = binascii.hexlify(f.read(16))
         f.seek(0x1B0)
-        unknown_07 = binascii.hexlify(f.read(48))
+        unknown_07_unused = binascii.hexlify(f.read(48))
         f.seek(0x1E0)
         wiiu_slc_nand_hmac = binascii.hexlify(f.read(20))
         f.seek(0x1F4)
-        unknown_08 = binascii.hexlify(f.read(12))
+        unknown_08_padding = binascii.hexlify(f.read(12))
         f.seek(0x200)
-        unknown_09 = binascii.hexlify(f.read(16))
+        unknown_09_unused = binascii.hexlify(f.read(16))
         f.seek(0x210)
-        unknown_10 = binascii.hexlify(f.read(12))
+        unknown_10_unused = binascii.hexlify(f.read(12))
         f.seek(0x21C)
-        wiiu_usb_key_seed_u32 = binascii.hexlify(f.read(4))
+        wiiu_ng_id = binascii.hexlify(f.read(4))
+        f.seek(0x220)
+        wiiu_ng_private_key = binascii.hexlify(f.read(32))
         f.seek(0x240)
-        unknown_11 = binascii.hexlify(f.read(32))        
+        wiiu_private_nss_device_cert_key = binascii.hexlify(f.read(32))        
         f.seek(0x260)
-        wiiu_rng_seed = binascii.hexlify(f.read(16))
+        wiiu_otp_rng_seed = binascii.hexlify(f.read(16))
         f.seek(0x270)
-        unknown_12 = binascii.hexlify(f.read(16))
+        unknown_12_unused = binascii.hexlify(f.read(16))
         f.seek(0x280)
-        possible_wiiu_and_vwii_root_ca_version = binascii.hexlify(f.read(4))
+        wiiu_root_cert_ms_id_0x00000012 = binascii.hexlify(f.read(4))
         f.seek(0x284)
-        possible_wiiu_and_vwii_root_ca_ms = binascii.hexlify(f.read(4))
+        wiiu_root_cert_ca_id_0x00000003 = binascii.hexlify(f.read(4))
         f.seek(0x288)
-        unknown_13 = binascii.hexlify(f.read(4))
+        wiiu_root_cert_ng_key_id = binascii.hexlify(f.read(4))
         f.seek(0x28C)
-        possible_wiiu_and_vwii_root_ca_signature = binascii.hexlify(f.read(64))
-        f.seek(0x2CC)
-        unknown_14 = binascii.hexlify(f.read(20))
+        wiiu_root_cert_ng_signature = binascii.hexlify(f.read(64))
+        f.seek(0x2C8)
+        unknown_14_unused = binascii.hexlify(f.read(20))
         f.seek(0x2E0)
         unknown_15_locked_by_boot1 = binascii.hexlify(f.read(32))
         
@@ -155,11 +167,17 @@ if os.path.exists(otpbinpath):
         f.seek(0x3B0)
         boot0_locked_unused_01 = binascii.hexlify(f.read(16))
         f.seek(0x3C0)
-        misc_empty = binascii.hexlify(f.read(16))
+        misc_empty1 = binascii.hexlify(f.read(32))
         f.seek(0x3E0)
-        misc_unknown = binascii.hexlify(f.read(16))
+        misc_empty2 = binascii.hexlify(f.read(4))
+        f.seek(0x3E4)
+        otp_version_and_revision = binascii.hexlify(f.read(4))
+        f.seek(0x3E8)
+        otp_date_code = binascii.hexlify(f.read(8)) 
         f.seek(0x3F0)
-        ascii_tag = binascii.hexlify(f.read(12))
+        otp_version_name_string = binascii.hexlify(f.read(8))
+        f.seek(0x3F8)
+        misc_empty3 = binascii.hexlify(f.read(4))
         f.seek(0x3FC)
         jtag_status = binascii.hexlify(f.read(4))
 
@@ -177,7 +195,7 @@ else:
 
 target=out0+"01. Wii boot1 SHA-1 hash.bin"
 fi = open(target, "wb")
-fi.write(vwii_boot1_sha1.decode("hex"))
+fi.write(wii_boot1_sha1.decode("hex"))
 fi.close()
 
 target=out0+"02. Wii common key.bin"
@@ -187,32 +205,32 @@ fi.close()
 
 target=out0+"03. Wii NG ID.bin"
 fi = open(target, "wb")
-fi.write(vwii_ng_id.decode("hex"))
+fi.write(wii_ng_id.decode("hex"))
 fi.close()
 
 target=out0+"04. Wii NG private key.bin"
 fi = open(target, "wb")
-fi.write(vwii_ng_priv_key.decode("hex"))
+fi.write(wii_ng_priv_key.decode("hex"))
 fi.close()
 
 target=out0+"05. Wii NAND HMAC (overlaps with NG private key).bin"
 fi = open(target, "wb")
-fi.write(vwii_nand_hmac.decode("hex"))
+fi.write(wii_nand_hmac.decode("hex"))
 fi.close()
 
 target=out0+"06. Wii NAND key.bin"
 fi = open(target, "wb")
-fi.write(vwii_nand_key.decode("hex"))
+fi.write(wii_nand_key.decode("hex"))
 fi.close()
 
 target=out0+"07. Wii RNG key.bin"
 fi = open(target, "wb")
-fi.write(vwii_rng_key.decode("hex"))
+fi.write(wii_rng_key.decode("hex"))
 fi.close()
 
-target=out0+"08. Unknown.bin"
+target=out0+"08. Unknown (Padding).bin"
 fi = open(target, "wb")
-fi.write(vwii_unknown.decode("hex"))
+fi.write(wii_unknown01_padding.decode("hex"))
 fi.close()
 
 
@@ -227,7 +245,7 @@ fi.close()
 
 target=out1+"02. Some flag for IOStrength configurations.bin"
 fi = open(target, "wb")
-fi.write(some_iostrength_config_flag.decode("hex"))
+fi.write(iostrength_config_flag.decode("hex"))
 fi.close()
 
 target=out1+"03. Pulse length for SEEPROM manual CLK.bin"
@@ -242,7 +260,7 @@ fi.close()
 
 target=out1+"05. Wii U Starbuck ancast key.bin"
 fi = open(target, "wb")
-fi.write(starbuck_ancast_key.decode("hex"))
+fi.write(wiiu_starbuck_ancast_key.decode("hex"))
 fi.close()
 
 target=out1+"06. Wii U SEEPROM key.bin"
@@ -252,12 +270,12 @@ fi.close()
 
 target=out1+"07. Unknown (01).bin"
 fi = open(target, "wb")
-fi.write(unknown_01.decode("hex"))
+fi.write(unknown_01_unused.decode("hex"))
 fi.close()
 
 target=out1+"08. Unknown (02).bin"
 fi = open(target, "wb")
-fi.write(unknown_02.decode("hex"))
+fi.write(unknown_02_unused.decode("hex"))
 fi.close()
 
 target=out1+"09. vWii common key.bin"
@@ -272,19 +290,19 @@ fi.close()
 
 target=out1+"11. Unknown (03).bin"
 fi = open(target, "wb")
-fi.write(unknown_03.decode("hex"))
+fi.write(unknown_03_unused.decode("hex"))
 fi.close()
 
  # 2. Wii U Bank
 
 target=out2+"01. Unknown (04).bin"
 fi = open(target, "wb")
-fi.write(unknown_04.decode("hex"))
+fi.write(unknown_04_unused.decode("hex"))
 fi.close()
 
 target=out2+"02. Unknown (05).bin"
 fi = open(target, "wb")
-fi.write(unknown_05.decode("hex"))
+fi.write(unknown_05_unused.decode("hex"))
 fi.close()
 
 target=out2+"03. Key to encrypt or decrypt SSL RSA key.bin"
@@ -324,9 +342,9 @@ fi = open(target, "wb")
 fi.write(wiiu_mlc_emmc_key.decode("hex"))
 fi.close()
 
-target=out3+"02. Key to decrypt SEEPROM devkit key.bin"
+target=out3+"02.  Key to encrypt and decrypt SHDD key.bin"
 fi = open(target, "wb")
-fi.write(seeprom_devkit_key_decryption_key.decode("hex"))
+fi.write(encrypt_decrypt_shdd_key.decode("hex"))
 fi.close()
 
 target=out3+"03. Key to encrypt DRH WLAN data.bin"
@@ -336,7 +354,7 @@ fi.close()
 
 target=out3+"04. Unknown (07).bin"
 fi = open(target, "wb")
-fi.write(unknown_07.decode("hex"))
+fi.write(unknown_07_unused.decode("hex"))
 fi.close()
 
 target=out3+"05. Wii U SLC (NAND) HMAC.bin"
@@ -344,35 +362,35 @@ fi = open(target, "wb")
 fi.write(wiiu_slc_nand_hmac.decode("hex"))
 fi.close()
 
-target=out3+"06. Unknown (08).bin"
+target=out3+"06. Unknown (08 - Padding).bin"
 fi = open(target, "wb")
-fi.write(unknown_08.decode("hex"))
+fi.write(unknown_08_padding.decode("hex"))
 fi.close()
 
  # 4. Wii U Bank
 target=out4+"01. Unknown (09).bin"
 fi = open(target, "wb")
-fi.write(unknown_09.decode("hex"))
+fi.write(unknown_09_unused.decode("hex"))
 fi.close()
 
 target=out4+"02. Unknown (10).bin"
 fi = open(target, "wb")
-fi.write(unknown_10.decode("hex"))
+fi.write(unknown_10_unused.decode("hex"))
 fi.close()
 
-target=out4+"03. The USB key seed in SEEPROM must start with this u32.bin"
+target=out4+"03. Wii U NG ID.bin"
 fi = open(target, "wb")
-fi.write(wiiu_usb_key_seed_u32.decode("hex"))
+fi.write(wiiu_ng_id.decode("hex"))
 fi.close()
 
-target=out4+"04. Possible vWii NG private key.bin"
+target=out4+"04. Wii U NG Private Key.bin"
 fi = open(target, "wb")
-fi.write(possible_vwii_ng_private_key.decode("hex"))
+fi.write(wiiu_ng_private_key.decode("hex"))
 fi.close()
 
 target=out4+"05. Unknown (11).bin"
 fi = open(target, "wb")
-fi.write(unknown_11.decode("hex"))
+fi.write(unknown_11_padding.decode("hex"))
 fi.close()
 
 target=out4+"06. Wii U RNG seed (only the first 0x04 bytes are used).bin"
