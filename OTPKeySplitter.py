@@ -11,7 +11,7 @@ optbin = os.path.abspath("OTP/otp.bin")
 
 x = "Output/"
 k = " - Wii U Bank"
-outputfol = [x, x+"00 - Wii Bank" , x+"01"+k, x+"02"+k, x+"03"+k, x+"04 - Wii U NG Bank", x+"05 - Wii U Certificate Bank" , x+"06 - Wii Certificate Bank", x+"07 - Misc Bank"]
+outputfol = [x, x+"00 - Wii Bank" , x+"01"+k, x+"02"+k, x+"03"+k, x+"04 - Wii U NG Bank", x+"05 - Wii U Bank" , x+"06 - Wii Certificate Bank", x+"07 - Misc Bank"]
 for f in outputfol:
 	if not os.path.exists(f):
 		os.makedirs(f)
@@ -23,7 +23,7 @@ out2 = x+"02"+k+"/"
 out3 = x+"03"+k+"/"
 out4 = x+"04 - Wii U NG Bank/"
 out5 = x+"05"+k+"/"
-out6 = x+"06 - Wii SEEPROM Bank/"
+out6 = x+"06 - Wii Certificate Bank/"
 out7 = x+"07 - Misc Bank/"
 
 #End other variables
@@ -71,14 +71,6 @@ if os.path.exists(optbin):
         f.seek(0x360)
         wii_private_nss_device_cert_key = binascii.hexlify(f.read(32))
         
-        # vWii SEEPROM Bank
-        
-#        f.seek(0x300)
-#        old_wii_seeprom_cert = binascii.hexlify(f.read(96))
-        f.seek(0x360)
-        old_wii_seeprom_sig = binascii.hexlify(f.read(32))
-        
-
         # The Wii U is next
         
         f.seek(0x080)
@@ -388,62 +380,50 @@ fi = open(target, "wb")
 fi.write(wiiu_ng_private_key.decode("hex"))
 fi.close()
 
-target=out4+"05. Unknown (11).bin"
+target=out4+"05. Wii U private key for NSS device certificate.bin"
 fi = open(target, "wb")
-fi.write(unknown_11_padding.decode("hex"))
+fi.write(wiiu_private_nss_device_cert_key.decode("hex"))
 fi.close()
 
 target=out4+"06. Wii U RNG seed (only the first 0x04 bytes are used).bin"
 fi = open(target, "wb")
-fi.write(wiiu_rng_seed.decode("hex"))
+fi.write(wiiu_otp_rng_seed.decode("hex"))
 fi.close()
 
 target=out4+"07. Unknown (12).bin"
 fi = open(target, "wb")
-fi.write(unknown_12.decode("hex"))
+fi.write(unknown_12_unused.decode("hex"))
 fi.close()
 
  # 5. Wii U Bank
-target=out5+"01. Possible Wii U and vWii Root-CA version (0x00000012).bin"
+target=out5+"01. Wii U root certificate MS ID.bin"
 fi = open(target, "wb")
-fi.write(possible_wiiu_and_vwii_root_ca_version.decode("hex"))
+fi.write(wiiu_root_cert_ms_id_0x00000012
+.decode("hex"))
 fi.close()
 
-target=out5+"02. Possible Wii U and vWii Root-CA MS (0x00000003).bin"
+target=out5+"02. Wii U root certificate CA ID.bin"
 fi = open(target, "wb")
-fi.write(possible_wiiu_and_vwii_root_ca_ms.decode("hex"))
 fi.close()
 
-target=out5+"03. Unknown (13).bin"
+target=out5+"03.  Wii U root certificate NG key ID.bin"
 fi = open(target, "wb")
-fi.write(unknown_13.decode("hex"))
+fi.write(wiiu_root_cert_ng_key_id.decode("hex"))
 fi.close()
 
-target=out5+"04. Possible Wii U and vWii Root-CA signature.bin"
+target=out5+"04. Wii U root certificate NG signature.bin"
 fi = open(target, "wb")
-fi.write(possible_wiiu_and_vwii_root_ca_signature.decode("hex"))
+fi.write(wiiu_root_cert_ng_signature.decode("hex"))
 fi.close()
 
-target=out5+"04. Unknown (14).bin"
+target=out5+"04. Unknown (14 - Unused).bin"
 fi = open(target, "wb")
-fi.write(unknown_14.decode("hex"))
+fi.write(unknown_14_unused.decode("hex"))
 fi.close()
 
 target=out5+"05. Unknown (locked out by boot1).bin"
 fi = open(target, "wb")
 fi.write(unknown_15_locked_by_boot1.decode("hex"))
-fi.close()
-
-# 6. Wii SEEPROM Bank
-
-target=out6+"01. Old Wii SEEPROM certificate data.bin"
-fi = open(target, "wb")
-fi.write(old_wii_seeprom_cert.decode("hex"))
-fi.close()
-
-target=out6+"02. Possible Old Wii SEEPROM signature.bin"
-fi = open(target, "wb")
-fi.write(old_wii_seeprom_sig.decode("hex"))
 fi.close()
 
 # 7. Misc Bank
@@ -463,19 +443,34 @@ fi = open(target, "wb")
 fi.write(boot0_locked_unused_01.decode("hex"))
 fi.close()
 
-target=out7+"04. Empty.bin"
+target=out7+"04. Empty 1.bin"
 fi = open(target, "wb")
-fi.write(misc_empty.decode("hex"))
+fi.write(misc_empty1.decode("hex"))
 fi.close()
 
-target=out7+"05. Unknown.bin"
+target=out7+"05. Empty 2.bin"
 fi = open(target, "wb")
-fi.write(misc_unknown.decode("hex"))
+fi.write(misc_empty2.decode("hex"))
 fi.close()
 
-target=out7+"06. ASCII tag (unknown meaning).bin"
+target=out7+"06. Empty.bin"
 fi = open(target, "wb")
-fi.write(ascii_tag.decode("hex"))
+fi.write(misc_empty3.decode("hex"))
+fi.close()
+
+target=out7+"0X. OTP Version and Revision.bin"
+fi = open(target, "wb")
+fi.write(otp_date_code.decode("hex"))
+fi.close()
+
+target=out7+"0X. OTP Date Code.bin"
+fi = open(target, "wb")
+fi.write(otp_version_and_revision.decode("hex"))
+fi.close()
+
+target=out7+"0X. OTP Version Name String.bin"
+fi = open(target, "wb")
+fi.write(otp_version_name_string.decode("hex"))
 fi.close()
 
 target=out7+"07. JTAG status.bin"
