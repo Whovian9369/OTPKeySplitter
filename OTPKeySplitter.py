@@ -11,7 +11,7 @@ optbin = os.path.abspath("OTP/otp.bin")
 
 x = "Output/"
 k = " - Wii U Bank"
-outputfol = [x, x+"00 - Wii Bank" , x+"01"+k, x+"02"+k, x+"03"+k, x+"04 - Wii U NG Bank", x+"05 - Wii U Bank" , x+"06 - Wii Certificate Bank", x+"07 - Misc Bank"]
+outputfol = [x, x+"00 - Wii Bank" , x+"01"+k, x+"02"+k, x+"03"+k, x+"04 - Wii U NG Bank", x+"05 - Wii U Certificate Bank" , x+"06 - Wii Certificate Bank", x+"07 - Misc Bank"]
 for f in outputfol:
 	if not os.path.exists(f):
 		os.makedirs(f)
