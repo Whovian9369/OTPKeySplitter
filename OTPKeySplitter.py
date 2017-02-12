@@ -22,7 +22,7 @@ out1 = x+"01"+k+"/"
 out2 = x+"02"+k+"/"
 out3 = x+"03"+k+"/"
 out4 = x+"04 - Wii U NG Bank/"
-out5 = x+"05"+k+"/"
+out5 = x+"05 - Wii U Certificate Bank/"
 out6 = x+"06 - Wii Certificate Bank/"
 out7 = x+"07 - Misc Bank/"
 
