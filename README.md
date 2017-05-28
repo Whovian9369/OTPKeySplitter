@@ -1,6 +1,8 @@
 # OTP Splitter
 
-To my knowledge, this only works on the Linux command line at the moment. If you test this on a Windows python2 instance, please do let me know.
+THIS IS A TEST BRANCH FOR TRYING TO CHANGE THE SCRIPT OVER TO A PROPER PYTHON3 SETTING. PROBABLY WON'T WORK WITH PYTHON2 AFTER I GET THIS WORKED ON.
+
+SORRY.
 
 This script lets you extract various keys from a dumped Wii U OTP, as outlined on [the WiiUBrew site](http://wiiubrew.org/wiki/Hardware/OTP).
 
