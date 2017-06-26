@@ -1,10 +1,10 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 import os, sys, zlib, binascii
 import codecs
 from Crypto.Cipher import AES
 
 
-optbin = os.path.abspath("OTP/otp.bin")
+otpbin = os.path.abspath("otp.bin")
 
 #Thank you Audiosurf for the initial folder creation help.
 #Mine was way too messy originally!
@@ -34,8 +34,8 @@ out7 = x+"07 - Misc Bank/"
 #For the source of this code, see:
 #https://github.com/FIX94/iosuhax/blob/master/bin/getfwimg.py
 
-if os.path.exists(optbin):
-    with open(optbin,'rb') as f:
+if os.path.exists(otpbin):
+    with open(otpbin,'rb') as f:
         print("Key extraction time!")
 
         # First, vWii.
@@ -176,7 +176,7 @@ if os.path.exists(optbin):
 else:
     if not os.path.exists("OTP"):
         os.makedirs("OTP")
-    print("Put the otp.bin into the OTP folder please!")
+    print("Put the otp.bin into this folder please!")
     sys.exit(1)
 
 #Output to files. This will be messy.
