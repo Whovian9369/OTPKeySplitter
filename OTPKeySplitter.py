@@ -187,42 +187,42 @@ else:
 
 target=out0+"01. Wii boot1 SHA-1 hash.bin"
 fi = open(target, "wb")
-fi.write(wii_boot1_sha1.decode("hex"))
+fi.write(wii_boot1_sha1)
 fi.close()
 
 target=out0+"02. Wii common key.bin"
 fi = open(target, "wb")
-fi.write(wii_common_key.decode("hex"))
+fi.write(wii_common_key)
 fi.close()
 
 target=out0+"03. Wii NG ID.bin"
 fi = open(target, "wb")
-fi.write(wii_ng_id.decode("hex"))
+fi.write(wii_ng_id)
 fi.close()
 
 target=out0+"04. Wii NG private key.bin"
 fi = open(target, "wb")
-fi.write(wii_ng_priv_key.decode("hex"))
+fi.write(wii_ng_priv_key)
 fi.close()
 
 target=out0+"05. Wii NAND HMAC (overlaps with NG private key).bin"
 fi = open(target, "wb")
-fi.write(wii_nand_hmac.decode("hex"))
+fi.write(wii_nand_hmac)
 fi.close()
 
 target=out0+"06. Wii NAND key.bin"
 fi = open(target, "wb")
-fi.write(wii_nand_key.decode("hex"))
+fi.write(wii_nand_key)
 fi.close()
 
 target=out0+"07. Wii RNG key.bin"
 fi = open(target, "wb")
-fi.write(wii_rng_key.decode("hex"))
+fi.write(wii_rng_key)
 fi.close()
 
 target=out0+"08. Unknown (Padding).bin"
 fi = open(target, "wb")
-fi.write(wii_unknown01_padding.decode("hex"))
+fi.write(wii_unknown01_padding)
 fi.close()
 
 
@@ -232,174 +232,174 @@ fi.close()
 
 target=out1+"01. Security level flag.bin"
 fi = open(target, "wb")
-fi.write(security_level_flag.decode("hex"))
+fi.write(security_level_flag)
 fi.close()
 
 target=out1+"02. Some flag for IOStrength configurations.bin"
 fi = open(target, "wb")
-fi.write(iostrength_config_flag.decode("hex"))
+fi.write(iostrength_config_flag)
 fi.close()
 
 target=out1+"03. Pulse length for SEEPROM manual CLK.bin"
 fi = open(target, "wb")
-fi.write(seeprom_manual_clk_pulse_length.decode("hex"))
+fi.write(seeprom_manual_clk_pulse_length)
 fi.close()
 
 target=out1+"04. Unknown (0x00010000).bin"
 fi = open(target, "wb")
-fi.write(unknown_00010000.decode("hex"))
+fi.write(unknown_00010000)
 fi.close()
 
 target=out1+"05. Wii U Starbuck ancast key.bin"
 fi = open(target, "wb")
-fi.write(wiiu_starbuck_ancast_key.decode("hex"))
+fi.write(wiiu_starbuck_ancast_key)
 fi.close()
 
 target=out1+"06. Wii U SEEPROM key.bin"
 fi = open(target, "wb")
-fi.write(wiiu_seeprom_key.decode("hex"))
+fi.write(wiiu_seeprom_key)
 fi.close()
 
 target=out1+"07. Unknown (01).bin"
 fi = open(target, "wb")
-fi.write(unknown_01_unused.decode("hex"))
+fi.write(unknown_01_unused)
 fi.close()
 
 target=out1+"08. Unknown (02).bin"
 fi = open(target, "wb")
-fi.write(unknown_02_unused.decode("hex"))
+fi.write(unknown_02_unused)
 fi.close()
 
 target=out1+"09. vWii common key.bin"
 fi = open(target, "wb")
-fi.write(vwii_common_key.decode("hex"))
+fi.write(vwii_common_key)
 fi.close()
 
 target=out1+"10. Wii U Common Key.bin"
 fi = open(target, "wb")
-fi.write(wiiu_common_key.decode("hex"))
+fi.write(wiiu_common_key)
 fi.close()
 
 target=out1+"11. Unknown (03).bin"
 fi = open(target, "wb")
-fi.write(unknown_03_unused.decode("hex"))
+fi.write(unknown_03_unused)
 fi.close()
 
  # 2. Wii U Bank
 
 target=out2+"01. Unknown (04).bin"
 fi = open(target, "wb")
-fi.write(unknown_04_unused.decode("hex"))
+fi.write(unknown_04_unused)
 fi.close()
 
 target=out2+"02. Unknown (05).bin"
 fi = open(target, "wb")
-fi.write(unknown_05_unused.decode("hex"))
+fi.write(unknown_05_unused)
 fi.close()
 
 target=out2+"03. Key to encrypt or decrypt SSL RSA key.bin"
 fi = open(target, "wb")
-fi.write(encrypt_decrypt_ssl_rsa_key.decode("hex"))
+fi.write(encrypt_decrypt_ssl_rsa_key)
 fi.close()
 
 target=out2+"04. Key to encrypt seeds for USB storage keys.bin"
 fi = open(target, "wb")
-fi.write(usb_storage_key_seed_encryption_key.decode("hex"))
+fi.write(usb_storage_key_seed_encryption_key)
 fi.close()
 
 target=out2+"05. Unknown (06).bin"
 fi = open(target, "wb")
-fi.write(unknown_06.decode("hex"))
+fi.write(unknown_06)
 fi.close()
 
 target=out2+"06. Wii U XOR key.bin"
 fi = open(target, "wb")
-fi.write(wiiu_xor_key.decode("hex"))
+fi.write(wiiu_xor_key)
 fi.close()
 
 target=out2+"07. Wii U RNG key.bin"
 fi = open(target, "wb")
-fi.write(wiiu_rng_key.decode("hex"))
+fi.write(wiiu_rng_key)
 fi.close()
 
 target=out2+"08. Wii U SLC (NAND) key.bin"
 fi = open(target, "wb")
-fi.write(wiiu_slc_nand_key.decode("hex"))
+fi.write(wiiu_slc_nand_key)
 fi.close()
 
  # 3. Wii U Bank
 
 target=out3+"01. Wii U MLC (eMMC) key.bin"
 fi = open(target, "wb")
-fi.write(wiiu_mlc_emmc_key.decode("hex"))
+fi.write(wiiu_mlc_emmc_key)
 fi.close()
 
 target=out3+"02.  Key to encrypt and decrypt SHDD key.bin"
 fi = open(target, "wb")
-fi.write(encrypt_decrypt_shdd_key.decode("hex"))
+fi.write(encrypt_decrypt_shdd_key)
 fi.close()
 
 target=out3+"03. Key to encrypt DRH WLAN data.bin"
 fi = open(target, "wb")
-fi.write(encryption_key_for_drh_wlan_data.decode("hex"))
+fi.write(encryption_key_for_drh_wlan_data)
 fi.close()
 
 target=out3+"04. Unknown (07).bin"
 fi = open(target, "wb")
-fi.write(unknown_07_unused.decode("hex"))
+fi.write(unknown_07_unused)
 fi.close()
 
 target=out3+"05. Wii U SLC (NAND) HMAC.bin"
 fi = open(target, "wb")
-fi.write(wiiu_slc_nand_hmac.decode("hex"))
+fi.write(wiiu_slc_nand_hmac)
 fi.close()
 
 target=out3+"06. Unknown (08 - Padding).bin"
 fi = open(target, "wb")
-fi.write(unknown_08_padding.decode("hex"))
+fi.write(unknown_08_padding)
 fi.close()
 
  # 4. Wii U Bank
 target=out4+"01. Unknown (09).bin"
 fi = open(target, "wb")
-fi.write(unknown_09_unused.decode("hex"))
+fi.write(unknown_09_unused)
 fi.close()
 
 target=out4+"02. Unknown (10).bin"
 fi = open(target, "wb")
-fi.write(unknown_10_unused.decode("hex"))
+fi.write(unknown_10_unused)
 fi.close()
 
 target=out4+"03. Wii U NG ID.bin"
 fi = open(target, "wb")
-fi.write(wiiu_ng_id.decode("hex"))
+fi.write(wiiu_ng_id)
 fi.close()
 
 target=out4+"04. Wii U NG Private Key.bin"
 fi = open(target, "wb")
-fi.write(wiiu_ng_private_key.decode("hex"))
+fi.write(wiiu_ng_private_key)
 fi.close()
 
 target=out4+"05. Wii U private key for NSS device certificate.bin"
 fi = open(target, "wb")
-fi.write(wiiu_private_nss_device_cert_key.decode("hex"))
+fi.write(wiiu_private_nss_device_cert_key)
 fi.close()
 
 target=out4+"06. Wii U RNG seed (only the first 0x04 bytes are used).bin"
 fi = open(target, "wb")
-fi.write(wiiu_otp_rng_seed.decode("hex"))
+fi.write(wiiu_otp_rng_seed)
 fi.close()
 
 target=out4+"07. Unknown (12).bin"
 fi = open(target, "wb")
-fi.write(unknown_12_unused.decode("hex"))
+fi.write(unknown_12_unused)
 fi.close()
 
  # 5. Wii U Bank
 target=out5+"01. Wii U root certificate MS ID.bin"
 fi = open(target, "wb")
 fi.write(wiiu_root_cert_ms_id_0x00000012
-.decode("hex"))
+)
 fi.close()
 
 target=out5+"02. Wii U root certificate CA ID.bin"
@@ -408,73 +408,73 @@ fi.close()
 
 target=out5+"03.  Wii U root certificate NG key ID.bin"
 fi = open(target, "wb")
-fi.write(wiiu_root_cert_ng_key_id.decode("hex"))
+fi.write(wiiu_root_cert_ng_key_id)
 fi.close()
 
 target=out5+"04. Wii U root certificate NG signature.bin"
 fi = open(target, "wb")
-fi.write(wiiu_root_cert_ng_signature.decode("hex"))
+fi.write(wiiu_root_cert_ng_signature)
 fi.close()
 
 target=out5+"04. Unknown (14 - Unused).bin"
 fi = open(target, "wb")
-fi.write(unknown_14_unused.decode("hex"))
+fi.write(unknown_14_unused)
 fi.close()
 
 target=out5+"05. Unknown (locked out by boot1).bin"
 fi = open(target, "wb")
-fi.write(unknown_15_locked_by_boot1.decode("hex"))
+fi.write(unknown_15_locked_by_boot1)
 fi.close()
 
 # 7. Misc Bank
 
 target=out7+"01. Unknown (locked by boot1).bin"
 fi = open(target, "wb")
-fi.write(boot1_locked_unknown_01.decode("hex"))
+fi.write(boot1_locked_unknown_01)
 fi.close()
 
 target=out7+"02. boot1 key (locked by boot0).bin"
 fi = open(target, "wb")
-fi.write(boot1_key_locked_by_b0.decode("hex"))
+fi.write(boot1_key_locked_by_b0)
 fi.close()
 
 target=out7+"03. Unknown (locked out by boot0, not used).bin"
 fi = open(target, "wb")
-fi.write(boot0_locked_unused_01.decode("hex"))
+fi.write(boot0_locked_unused_01)
 fi.close()
 
 target=out7+"04. Empty 1.bin"
 fi = open(target, "wb")
-fi.write(misc_empty1.decode("hex"))
+fi.write(misc_empty1)
 fi.close()
 
 target=out7+"05. Empty 2.bin"
 fi = open(target, "wb")
-fi.write(misc_empty2.decode("hex"))
+fi.write(misc_empty2)
 fi.close()
 
 target=out7+"06. Empty.bin"
 fi = open(target, "wb")
-fi.write(misc_empty3.decode("hex"))
+fi.write(misc_empty3)
 fi.close()
 
 target=out7+"0X. OTP Version and Revision.bin"
 fi = open(target, "wb")
-fi.write(otp_date_code.decode("hex"))
+fi.write(otp_date_code)
 fi.close()
 
 target=out7+"0X. OTP Date Code.bin"
 fi = open(target, "wb")
-fi.write(otp_version_and_revision.decode("hex"))
+fi.write(otp_version_and_revision)
 fi.close()
 
 target=out7+"0X. OTP Version Name String.bin"
 fi = open(target, "wb")
-fi.write(otp_version_name_string.decode("hex"))
+fi.write(otp_version_name_string)
 fi.close()
 
 target=out7+"07. JTAG status.bin"
 fi = open(target, "wb")
-fi.write(jtag_status.decode("hex"))
+fi.write(jtag_status)
 fi.close()
 #End file output
