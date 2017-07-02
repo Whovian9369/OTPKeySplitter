@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-import os, sys, zlib
+import os, sys, zlib, binascii
 import codecs
 from Crypto.Cipher import AES
-
 
 otpbin = os.path.abspath("otp.bin")
 
@@ -25,7 +24,7 @@ out4 = x+"04 - Wii U NG Bank/"
 out5 = x+"05 - Wii U Certificate Bank/"
 out6 = x+"06 - Wii Certificate Bank/"
 out7 = x+"07 - Misc Bank/"
-
+keytxt = open('keys.txt', 'a')
 #End other variables
 
 #prepare keys
@@ -478,3 +477,16 @@ fi = open(target, "wb")
 fi.write(jtag_status)
 fi.close()
 #End file output
+
+#Start TXT writing
+keytxt.write("vWii:\nHHHHHHHHHHHHHHHHHHHHHHHH")
+keytxt.write("\n01: " + binascii.hexlify(wii_boot1_sha1))
+keytxt.write("\n02: " + binascii.hexlify(wii_common_key))
+keytxt.write("\n03: " + binascii.hexlify(wii_ng_id))
+keytxt.write("\n04: " + binascii.hexlify(wii_ng_priv_key))
+keytxt.write("\n05: " + binascii.hexlify(PLACEHOLDER))
+keytxt.write("\n06: " + binascii.hexlify(PLACEHOLDER))
+keytxt.write("\n07: " + binascii.hexlify(PLACEHOLDER))
+keytxt.write("\n08: " + binascii.hexlify(PLACEHOLDER))
+keytxt.write("\n09: " + binascii.hexlify(PLACEHOLDER))
+keytxt.write("\n10: " + binascii.hexlify(PLACEHOLDER))
