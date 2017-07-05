@@ -17,8 +17,9 @@ This script lets you extract various keys from a dumped Wii U OTP, as outlined o
  * Put the extracted OTP from step 1 into the folder holding the script.
  * Run the script using Python 3.
  	* This can likely be done by running `python3 OTPKeySplitter.py`
- * Use a hex editor to copy out your keys.
- 	* I personally would suggest using [HxD](https://mh-nexus.de/en/hxd/) on Windows, or [Bless](http://home.gna.org/bless) on Linux distros.
+ * Use a hex editor to copy out your keys OR grab the key directly from the Keys.txt file.
+ 	* If you insist on using the hex editor technique:
+ 		*I personally would suggest using [HxD](https://mh-nexus.de/en/hxd/) on Windows, or [Bless](http://home.gna.org/bless) on Linux distros.
 
 ### BIG thanks goes to (in no particular order):
 

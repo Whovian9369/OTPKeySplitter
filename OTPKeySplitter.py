@@ -4,7 +4,10 @@ import codecs
 from Crypto.Cipher import AES
 
 otpbin = os.path.abspath("otp.bin")
-
+if not os.path.exists(otpbin):
+    print("Put the otp.bin into this folder please!")
+    sys.exit(1)
+keytxt = open('Keys.txt', 'a')
 #Thank you Audiosurf for the initial folder creation help.
 #Mine was way too messy originally!
 
@@ -24,7 +27,6 @@ out4 = x+"04 - Wii U NG Bank/"
 out5 = x+"05 - Wii U Certificate Bank/"
 out6 = x+"06 - Wii Certificate Bank/"
 out7 = x+"07 - Misc Bank/"
-keytxt = open('keys.txt', 'a')
 #End other variables
 
 #prepare keys
@@ -173,9 +175,8 @@ if os.path.exists(otpbin):
         jtag_status = f.read(4)
 
 else:
-    if not os.path.exists("OTP"):
-        os.makedirs("OTP")
     print("Put the otp.bin into this folder please!")
+    print("If you got here without the file there... Darn you.")
     sys.exit(1)
 
 #Output to files. This will be messy.
@@ -185,369 +186,375 @@ else:
  # 0. Wii Bank
 
 targetfol=out0
-keytxt.write("(Most of) vWii:\n")
+keytxt.write("(Most of) vWii:\n\n")
 
-name="01. Wii boot1 SHA-1 hash.bin"
-fi = open(targetfol+name".bin", "wb")
+name="01. Wii boot1 SHA-1 hash"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wii_boot1_sha1)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wii_boot1_sha1).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wii_boot1_sha1).decode('utf-8')+"\n")
 
-name="02. Wii common key.bin"
-fi = open(targetfol+name".bin", "wb")
+name="02. Wii common key"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wii_common_key)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wii_common_key).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wii_common_key).decode('utf-8')+"\n")
 
-name="03. Wii NG ID.bin"
-fi = open(targetfol+name".bin", "wb")
+name="03. Wii NG ID"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wii_ng_id)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wii_ng_id).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wii_ng_id).decode('utf-8')+"\n")
 
-name="04. Wii NG private key.bin"
-fi = open(targetfol+name".bin", "wb")
+name="04. Wii NG private key"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wii_ng_priv_key)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wii_ng_priv_key).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wii_ng_priv_key).decode('utf-8')+"\n")
 
-name="05. Wii NAND HMAC (overlaps with NG private key).bin"
-fi = open(targetfol+name".bin", "wb")
+name="05. Wii NAND HMAC (overlaps with NG private key)"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wii_nand_hmac)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wii_nand_hmac).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wii_nand_hmac).decode('utf-8')+"\n")
 
-name="06. Wii NAND key.bin"
-fi = open(targetfol+name".bin", "wb")
+name="06. Wii NAND key"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wii_nand_key)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wii_nand_key).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wii_nand_key).decode('utf-8')+"\n")
 
-name="07. Wii RNG key.bin"
-fi = open(targetfol+name".bin", "wb")
+name="07. Wii RNG key"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wii_rng_key)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wii_rng_key).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wii_rng_key).decode('utf-8')+"\n")
 
-name="08. Unknown (Padding).bin"
-fi = open(targetfol+name".bin", "wb")
+name="08. Unknown (Padding)"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wii_unknown01_padding)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wii_unknown01_padding).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wii_unknown01_padding).decode('utf-8')+"\n")
 
 keytxt.write("\n------------------------------------------------")
 
 # Wii U
-keytxt.write("\n*(Mostly) Wii U:")
+keytxt.write("\n\n*(Mostly) Wii U:\n")
+keytxt.write("\n	1. Wii U Bank\n")
  # 1. Wii U Bank
 
 targetfol=out1
 
-name="01. Security level flag.bin"
-fi = open(targetfol+name".bin", "wb")
+name="01. Security level flag"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(security_level_flag)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(security_level_flag).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(security_level_flag).decode('utf-8')+"\n")
 
-name="02. Some flag for IOStrength configurations.bin"
-fi = open(targetfol+name".bin", "wb")
+name="02. Some flag for IOStrength configurations"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(iostrength_config_flag)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(iostrength_config_flag).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(iostrength_config_flag).decode('utf-8')+"\n")
 
-name="03. Pulse length for SEEPROM manual CLK.bin"
-fi = open(targetfol+name".bin", "wb")
+name="03. Pulse length for SEEPROM manual CLK"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(seeprom_manual_clk_pulse_length)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(seeprom_manual_clk_pulse_length).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(seeprom_manual_clk_pulse_length).decode('utf-8')+"\n")
 
-name="04. Unknown (0x00010000).bin"
-fi = open(targetfol+name".bin", "wb")
+name="04. Unknown (0x00010000)"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(unknown_00010000)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(unknown_00010000).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(unknown_00010000).decode('utf-8')+"\n")
 
-name="05. Wii U Starbuck ancast key.bin"
-fi = open(targetfol+name".bin", "wb")
+name="05. Wii U Starbuck ancast key"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wiiu_starbuck_ancast_key)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_starbuck_ancast_key).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_starbuck_ancast_key).decode('utf-8')+"\n")
 
-name="06. Wii U SEEPROM key.bin"
-fi = open(targetfol+name".bin", "wb")
+name="06. Wii U SEEPROM key"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wiiu_seeprom_key)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_seeprom_key).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_seeprom_key).decode('utf-8')+"\n")
 
-name="07. Unknown (01).bin"
-fi = open(targetfol+name".bin", "wb")
+name="07. Unknown (01)"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(unknown_01_unused)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(unknown_01_unused).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(unknown_01_unused).decode('utf-8')+"\n")
 
-name="08. Unknown (02).bin"
-fi = open(targetfol+name".bin", "wb")
+name="08. Unknown (02)"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(unknown_02_unused)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(unknown_02_unused).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(unknown_02_unused).decode('utf-8')+"\n")
 
-name="09. vWii common key.bin"
-fi = open(targetfol+name".bin", "wb")
+name="09. vWii common key"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(vwii_common_key)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(vwii_common_key).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(vwii_common_key).decode('utf-8')+"\n")
 
-name="10. Wii U Common Key.bin"
-fi = open(targetfol+name".bin", "wb")
+name="10. Wii U Common Key"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wiiu_common_key)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_common_key).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_common_key).decode('utf-8')+"\n")
 
-name="11. Unknown (03).bin"
-fi = open(targetfol+name".bin", "wb")
+name="11. Unknown (03)"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(unknown_03_unused)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(unknown_03_unused).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(unknown_03_unused).decode('utf-8')+"\n")
 
  # 2. Wii U Bank
+keytxt.write("\n	2. Wii U Bank\n")
 
 targetfol=out2
 
-name="01. Unknown (04).bin"
-fi = open(targetfol+name".bin", "wb")
+name="01. Unknown (04)"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(unknown_04_unused)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(unknown_04_unused).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(unknown_04_unused).decode('utf-8')+"\n")
 
-name="02. Unknown (05).bin"
-fi = open(targetfol+name".bin", "wb")
+name="02. Unknown (05)"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(unknown_05_unused)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(unknown_05_unused).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(unknown_05_unused).decode('utf-8')+"\n")
 
-name="03. Key to encrypt or decrypt SSL RSA key.bin"
-fi = open(targetfol+name".bin", "wb")
+name="03. Key to encrypt or decrypt SSL RSA key"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(encrypt_decrypt_ssl_rsa_key)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(encrypt_decrypt_ssl_rsa_key).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(encrypt_decrypt_ssl_rsa_key).decode('utf-8')+"\n")
 
-name="04. Key to encrypt seeds for USB storage keys.bin"
-fi = open(targetfol+name".bin", "wb")
+name="04. Key to encrypt seeds for USB storage keys"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(usb_storage_key_seed_encryption_key)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(usb_storage_key_seed_encryption_key).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(usb_storage_key_seed_encryption_key).decode('utf-8')+"\n")
 
-name="05. Unknown (06).bin"
-fi = open(targetfol+name".bin", "wb")
+name="05. Unknown (06)"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(unknown_06)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(unknown_06).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(unknown_06).decode('utf-8')+"\n")
 
-name="06. Wii U XOR key.bin"
-fi = open(targetfol+name".bin", "wb")
+name="06. Wii U XOR key"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wiiu_xor_key)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_xor_key).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_xor_key).decode('utf-8')+"\n")
 
-name="07. Wii U RNG key.bin"
-fi = open(targetfol+name".bin", "wb")
+name="07. Wii U RNG key"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wiiu_rng_key)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_rng_key).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_rng_key).decode('utf-8')+"\n")
 
-name="08. Wii U SLC (NAND) key.bin"
-fi = open(targetfol+name".bin", "wb")
+name="08. Wii U SLC (NAND) key"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wiiu_slc_nand_key)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_slc_nand_key).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_slc_nand_key).decode('utf-8')+"\n")
 
  # 3. Wii U Bank
+keytxt.write("\n	3. Wii U Bank\n")
 
 targetfol=out3
 
-name="01. Wii U MLC (eMMC) key.bin"
-fi = open(targetfol+name".bin", "wb")
+name="01. Wii U MLC (eMMC) key"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wiiu_mlc_emmc_key)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_mlc_emmc_key).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_mlc_emmc_key).decode('utf-8')+"\n")
 
-name="02.  Key to encrypt and decrypt SHDD key.bin"
-fi = open(targetfol+name".bin", "wb")
+name="02.  Key to encrypt and decrypt SHDD key"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(encrypt_decrypt_shdd_key)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(encrypt_decrypt_shdd_key).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(encrypt_decrypt_shdd_key).decode('utf-8')+"\n")
 
-name="03. Key to encrypt DRH WLAN data.bin"
-fi = open(targetfol+name".bin", "wb")
+name="03. Key to encrypt DRH WLAN data"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(encryption_key_for_drh_wlan_data)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(encryption_key_for_drh_wlan_data).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(encryption_key_for_drh_wlan_data).decode('utf-8')+"\n")
 
-name="04. Unknown (07).bin"
-fi = open(targetfol+name".bin", "wb")
+name="04. Unknown (07)"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(unknown_07_unused)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(unknown_07_unused).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(unknown_07_unused).decode('utf-8')+"\n")
 
-name="05. Wii U SLC (NAND) HMAC.bin"
-fi = open(targetfol+name".bin", "wb")
+name="05. Wii U SLC (NAND) HMAC"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wiiu_slc_nand_hmac)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_slc_nand_hmac).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_slc_nand_hmac).decode('utf-8')+"\n")
 
-name="06. Unknown (08 - Padding).bin"
-fi = open(targetfol+name".bin", "wb")
+name="06. Unknown (08 - Padding)"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(unknown_08_padding)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(unknown_08_padding).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(unknown_08_padding).decode('utf-8')+"\n")
 
  # 4. Wii U Bank
+keytxt.write("\n	4. Wii U Bank\n")
 
 targetfol=out4
 
-name="01. Unknown (09).bin"
-fi = open(targetfol+name".bin", "wb")
+name="01. Unknown (09)"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(unknown_09_unused)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(unknown_09_unused).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(unknown_09_unused).decode('utf-8')+"\n")
 
-name="02. Unknown (10).bin"
-fi = open(targetfol+name".bin", "wb")
+name="02. Unknown (10)"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(unknown_10_unused)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(unknown_10_unused).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(unknown_10_unused).decode('utf-8')+"\n")
 
-name="03. Wii U NG ID.bin"
-fi = open(targetfol+name".bin", "wb")
+name="03. Wii U NG ID"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wiiu_ng_id)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_ng_id).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_ng_id).decode('utf-8')+"\n")
 
-name="04. Wii U NG Private Key.bin"
-fi = open(targetfol+name".bin", "wb")
+name="04. Wii U NG Private Key"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wiiu_ng_private_key)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_ng_private_key).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_ng_private_key).decode('utf-8')+"\n")
 
-name="05. Wii U private key for NSS device certificate.bin"
-fi = open(targetfol+name".bin", "wb")
+name="05. Wii U private key for NSS device certificate"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wiiu_private_nss_device_cert_key)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_private_nss_device_cert_key).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_private_nss_device_cert_key).decode('utf-8')+"\n")
 
-name="06. Wii U RNG seed (only the first 0x04 bytes are used).bin"
-fi = open(targetfol+name".bin", "wb")
+name="06. Wii U RNG seed (only the first 0x04 bytes are used)"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wiiu_otp_rng_seed)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_otp_rng_seed).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_otp_rng_seed).decode('utf-8')+"\n")
 
-name="07. Unknown (12).bin"
-fi = open(targetfol+name".bin", "wb")
+name="07. Unknown (12)"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(unknown_12_unused)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(unknown_12_unused).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(unknown_12_unused).decode('utf-8')+"\n")
 
 # 5. Wii U Bank
+keytxt.write("\n	5. Wii U Bank\n")
 
 targetfol=out5
 
-name="01. Wii U root certificate MS ID.bin"
-fi = open(targetfol+name".bin", "wb")
+name="01. Wii U root certificate MS ID"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wiiu_root_cert_ms_id_0x00000012)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_root_cert_ms_id_0x00000012).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_root_cert_ms_id_0x00000012).decode('utf-8')+"\n")
 
-name="02. Wii U root certificate CA ID.bin"
-fi = open(targetfol+name".bin", "wb")
+name="02. Wii U root certificate CA ID"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wiiu_root_cert_ca_id_0x00000003)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_root_cert_ca_id_0x00000003).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_root_cert_ca_id_0x00000003).decode('utf-8')+"\n")
 
-name="03.  Wii U root certificate NG key ID.bin"
-fi = open(targetfol+name".bin", "wb")
+name="03.  Wii U root certificate NG key ID"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wiiu_root_cert_ng_key_id)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_root_cert_ng_key_id).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_root_cert_ng_key_id).decode('utf-8')+"\n")
 
-name="04. Wii U root certificate NG signature.bin"
-fi = open(targetfol+name".bin", "wb")
+name="04. Wii U root certificate NG signature"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(wiiu_root_cert_ng_signature)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_root_cert_ng_signature).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(wiiu_root_cert_ng_signature).decode('utf-8')+"\n")
 
-name="04. Unknown (14 - Unused).bin"
-fi = open(targetfol+name".bin", "wb")
+name="04. Unknown (14 - Unused)"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(unknown_14_unused)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(unknown_14_unused).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(unknown_14_unused).decode('utf-8')+"\n")
 
-name="05. Unknown (locked out by boot1).bin"
-fi = open(targetfol+name".bin", "wb")
+name="05. Unknown (locked out by boot1)"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(unknown_15_locked_by_boot1)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(unknown_15_locked_by_boot1).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(unknown_15_locked_by_boot1).decode('utf-8')+"\n")
 
 # 7. Misc Bank
+keytxt.write("\n	7. Wii U Bank\n")
 
 targetfol=out7
 
-name="01. Unknown (locked by boot1).bin"
-fi = open(targetfol+name".bin", "wb")
+name="01. Unknown (locked by boot1)"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(boot1_locked_unknown_01)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(boot1_locked_unknown_01).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(boot1_locked_unknown_01).decode('utf-8')+"\n")
 
-name="02. boot1 key (locked by boot0).bin"
-fi = open(targetfol+name".bin", "wb")
+name="02. boot1 key (locked by boot0)"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(boot1_key_locked_by_b0)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(boot1_key_locked_by_b0).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(boot1_key_locked_by_b0).decode('utf-8')+"\n")
 
-name="03. Unknown (locked out by boot0, not used).bin"
-fi = open(targetfol+name".bin", "wb")
+name="03. Unknown (locked out by boot0, not used)"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(boot0_locked_unused_01)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(boot0_locked_unused_01).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(boot0_locked_unused_01).decode('utf-8')+"\n")
 
-name="04. Empty 1.bin"
-fi = open(targetfol+name".bin", "wb")
+name="04. Empty 1"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(misc_empty1)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(misc_empty1).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(misc_empty1).decode('utf-8')+"\n")
 
-name="05. Empty 2.bin"
-fi = open(targetfol+name".bin", "wb")
+name="05. Empty 2"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(misc_empty2)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(misc_empty2).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(misc_empty2).decode('utf-8')+"\n")
 
-name="06. Empty.bin"
-fi = open(targetfol+name".bin", "wb")
+name="06. Empty"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(misc_empty3)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(misc_empty3).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(misc_empty3).decode('utf-8')+"\n")
 
-name="0X. OTP Version and Revision.bin"
-fi = open(targetfol+name".bin", "wb")
+name="0X. OTP Version and Revision"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(otp_date_code)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(otp_date_code).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(otp_date_code).decode('utf-8')+"\n")
 
-name="0X. OTP Date Code.bin"
-fi = open(targetfol+name".bin", "wb")
+name="0X. OTP Date Code"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(otp_version_and_revision)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(otp_version_and_revision).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(otp_version_and_revision).decode('utf-8')+"\n")
 
-name="0X. OTP Version Name String.bin"
-fi = open(targetfol+name".bin", "wb")
+name="0X. OTP Version Name String"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(otp_version_name_string)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(otp_version_name_string).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(otp_version_name_string).decode('utf-8')+"\n")
 
-name="07. JTAG status.bin"
-fi = open(targetfol+name".bin", "wb")
+name="07. JTAG status"
+fi = open(targetfol+name+".bin", "wb")
 fi.write(jtag_status)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(jtag_status).decode('utf-8'))
+keytxt.write("\n"+name+": " + binascii.hexlify(jtag_status).decode('utf-8')+"\n")
 #End file output
