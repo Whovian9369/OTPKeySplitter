@@ -1,10 +1,6 @@
 # OTP Key Extractor
 
-**This is a test and development branch for python3 use.**
-----------------------------------------
-
 This script lets you extract various keys from a dumped Wii U OTP, as outlined on [the WiiUBrew site](http://wiiubrew.org/wiki/Hardware/OTP).
-
 ----------------------------------------
 
 ### How to use it:
