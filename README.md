@@ -24,9 +24,8 @@ This script lets you extract various keys from a dumped Wii U OTP, as outlined o
 
  * Dimok, for the original [OTP2SD](https://github.com/dimok789/otp2sd_dumper) homebrew that started me on this
  	* For the unofficial GBATemp thread: [Click Here](http://gbatemp.net/threads/otp2sd-by-dimok.447353/)
- * The WiiUBru team that got the list up in the first place, and the ones that put up with my complaining about writing this.
- * vmgoose for code contributions, like pushing the keys as hex to a file.
+ * The WiiUBrew team that got the list up in the first place, and the ones that put up with my complaining about writing this.
  * Audiosurf for helping shorten the script itself in quite a few places.
- * Truedread for supplying an OTP.bin for me to test with.
- * Anyone else that cares enough to nag me about it in the WiiUBru IRC.
+ * Just all of the WiiUBru crew in general -- Love ya guys!
  * My friends that I've complained about this to, that aren't in the WiiUBru IRC.
+ * Thank you dogcow for giving me the missing `binascii.hexlify(variable).decode('utf-8')` hint that I needed for writing the keys to a text file!
