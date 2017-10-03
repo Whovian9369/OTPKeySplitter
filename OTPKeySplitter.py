@@ -57,6 +57,8 @@ if os.path.exists(otpbin):
         wii_rng_key = f.read(16)
         f.seek(0x078)
         wii_unknown01_padding = f.read(8)
+#Wiki switches to Bank 1 (Wii U) right here. See #L78 // 0x300 begins Bank 6. 
+
         f.seek(0x300)
         wii_root_cert_ms_id_0x00000002 = f.read(4)
         f.seek(0x304)
@@ -72,7 +74,7 @@ if os.path.exists(otpbin):
         f.seek(0x360)
         wii_private_nss_device_cert_key = f.read(32)
         
-        # The Wii U is next
+# Wii U
         
         f.seek(0x080)
         security_level_flag = f.read(4)
@@ -81,7 +83,7 @@ if os.path.exists(otpbin):
         f.seek(0x088)
         seeprom_manual_clk_pulse_length = f.read(4)
         f.seek(0x08C)
-        unknown_00010000 = f.read(4)
+        SigType_00010000 = f.read(4)
         f.seek(0x090)
         wiiu_starbuck_ancast_key = f.read(16)
         f.seek(0x0A0)
@@ -263,11 +265,11 @@ fi.write(seeprom_manual_clk_pulse_length)
 fi.close()
 keytxt.write("\n"+name+": " + binascii.hexlify(seeprom_manual_clk_pulse_length).decode('utf-8')+"\n")
 
-name="04. Unknown (0x00010000)"
+name="04. Seems_To_Be_A_Sig_Type_(0x00010000)"
 fi = open(targetfol+name+".bin", "wb")
-fi.write(unknown_00010000)
+fi.write(SigType_00010000)
 fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(unknown_00010000).decode('utf-8')+"\n")
+keytxt.write("\n"+name+": " + binascii.hexlify(SigType_00010000).decode('utf-8')+"\n")
 
 name="05. Wii U Starbuck ancast key"
 fi = open(targetfol+name+".bin", "wb")
@@ -528,31 +530,30 @@ fi.write(misc_empty2)
 fi.close()
 keytxt.write("\n"+name+": " + binascii.hexlify(misc_empty2).decode('utf-8')+"\n")
 
-name="06. Empty"
-fi = open(targetfol+name+".bin", "wb")
-fi.write(misc_empty3)
-fi.close()
-keytxt.write("\n"+name+": " + binascii.hexlify(misc_empty3).decode('utf-8')+"\n")
-
-name="0X. OTP Version and Revision"
+name="06. OTP Version and Revision"
 fi = open(targetfol+name+".bin", "wb")
 fi.write(otp_date_code)
 fi.close()
 keytxt.write("\n"+name+": " + binascii.hexlify(otp_date_code).decode('utf-8')+"\n")
 
-name="0X. OTP Date Code"
+name="07. OTP Date Code"
 fi = open(targetfol+name+".bin", "wb")
 fi.write(otp_version_and_revision)
 fi.close()
 keytxt.write("\n"+name+": " + binascii.hexlify(otp_version_and_revision).decode('utf-8')+"\n")
 
-name="0X. OTP Version Name String"
 fi = open(targetfol+name+".bin", "wb")
 fi.write(otp_version_name_string)
 fi.close()
 keytxt.write("\n"+name+": " + binascii.hexlify(otp_version_name_string).decode('utf-8')+"\n")
 
-name="07. JTAG status"
+name="09. Empty 3"
+fi = open(targetfol+name+".bin", "wb")
+fi.write(misc_empty3)
+fi.close()
+keytxt.write("\n"+name+": " + binascii.hexlify(misc_empty3).decode('utf-8')+"\n")
+
+name="10. JTAG status"
 fi = open(targetfol+name+".bin", "wb")
 fi.write(jtag_status)
 fi.close()
