@@ -542,6 +542,7 @@ fi.write(otp_version_and_revision)
 fi.close()
 keytxt.write("\n"+name+": " + binascii.hexlify(otp_version_and_revision).decode('utf-8')+"\n")
 
+name="08. OTP Version Name String"
 fi = open(targetfol+name+".bin", "wb")
 fi.write(otp_version_name_string)
 fi.close()
