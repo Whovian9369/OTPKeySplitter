@@ -5,12 +5,15 @@ This script lets you extract various keys from a dumped Wii U OTP, as outlined o
 
 ### How to use it:
 
- * Extract your OTP to your SD card by using [OTP2SD](https://github.com/dimok789/otp2sd_dumper)
- * Copy the resulting OTP.bin to a folder called "OTP"
- 	* If you forget to do so or put it in the wrong place before running the script - It will create the folder then let you know where to put it.
- * Install pycrypto somehow. Like `sudo pip install pycrypto` or `sudo pip3 install pycrypto` or however else.
+ * Extract your OTP to your SD card by using the following:
+	* [OTP2SD](https://github.com/dimok789/otp2sd_dumper) (for a less complete OTP dump)
+ 	* [hexCFW](https://github.com/hexkyz/hexFW) (for an OTP with two extra keys, which were previously inaccessible.)
+         * This is done via getting access to boot1... Which I'm unable to explain on WHY it works.
+	 	* No, we don't have the boot1 key. Yet. This dumps the OTP without the boot1 decryption key.
  * Download the script to a folder.
- * Put the extracted OTP from step 1 into the folder holding the script.
+ * Copy the resulting OTP.bin to the folder containing the OTPKeySplitter.py script.
+ 	* If you forget to do so or put it in the wrong place before running the script - It will let you know where to put it.
+ * Install pycrypto somehow. Like `sudo pip install pycrypto` or `sudo pip3 install pycrypto` or however else.
  * Run the script using Python 3.
  	* This can likely be done by running `python3 OTPKeySplitter.py`
  * Use a hex editor to copy out your keys OR grab the key directly from the Keys.txt file.
