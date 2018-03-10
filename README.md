@@ -26,5 +26,5 @@ This script lets you extract various keys from a dumped Wii U OTP, as outlined o
  * The WiiUBrew team that got the list up in the first place.
  * Audiosurf for helping shorten the script itself in quite a few places.
  * My friends that I've complained about this to.
- 	* **Especially** QuarkTheAwesome, and vgmoose. Those two have been great help with helping keep me sane.
+ 	* Especially those that were great help with helping keep me sane and sanity check me when I needed it!
  * Thank you dogcow for giving me the missing `binascii.hexlify(variable).decode('utf-8')` hint that I needed for writing the keys to a text file!
