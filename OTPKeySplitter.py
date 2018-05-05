@@ -199,7 +199,7 @@ for name, data in WII:
     with open(targetfol+name+".bin", "wb") as fi:
         fi.write(data)
     keytxt.write("\n{}: {}\n".format(
-        name, binascii.hexlify(wii_boot1_sha1).decode('utf-8')))
+        name, binascii.hexlify(data).decode('utf-8')))
 
 
 keytxt.write("\n------------------------------------------------")
