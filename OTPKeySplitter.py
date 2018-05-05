@@ -5,10 +5,10 @@ from Crypto.Cipher import AES
 
 otpbin = os.path.abspath("otp.bin")
 if not os.path.exists(otpbin):
-    print("Put the otp.bin into this folder please!")
+    print("Put the otp.bin into this directory, please!")
     sys.exit(1)
 keytxt = open('Keys.txt', 'a')
-#Thank you Audiosurf for the initial folder creation help.
+#Thank you Audiosurf for the initial directory creation help.
 #Mine was way too messy originally!
 
 x = "Output/"
