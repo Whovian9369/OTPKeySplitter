@@ -1,6 +1,6 @@
 # OTP Key Extractor
 
-This script lets you extract various keys from a dumped Wii U OTP, as outlined on [the WiiUBrew site](http://wiiubrew.org/wiki/Hardware/OTP).
+This script lets you extract various keys from a dumped Wii U OTP, as outlined on [the WiiUBrew site](http://wiiubrew.org/wiki/Hardware/OTP#OTP_Contents).
 ----------------------------------------
 
 ### How to use it:
