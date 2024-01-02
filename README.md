@@ -1,3 +1,10 @@
+# Hello!
+I suggest using [`Coffee-Reading`](https://github.com/Nightkingale/Coffee-Reading) by [Nightkingale](https://github.com/Nightkingale) instead!
+`OTPKeySplitter` was basically thrown together for my own use at the time, but I don't know Python so it was *incredibly* bad code that was copy and pasted many times. 
+[`Coffee-Reading`](https://github.com/Nightkingale/Coffee-Reading) is far better and does the job, so I highly suggest using it instead!
+
+Original `README.md` is below:
+
 # OTP Key Extractor
 
 This script lets you extract various keys from a dumped Wii U OTP, as outlined on [the WiiUBrew site](http://wiiubrew.org/wiki/Hardware/OTP#OTP_Contents).
